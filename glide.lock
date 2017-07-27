@@ -1,6 +1,10 @@
 hash: 0c13cd8b2a1558a3f54557ee3e08f11928244c01fa3f01426b73f5e295683b59
-updated: 2017-07-27T13:27:14.791141118-07:00
+updated: 2017-07-27T14:18:30.395608719-07:00
 imports: []
 testImports:
+- name: github.com/jinmatt/go-seed-rand
+  version: e1d37704c07eb0daccb705e8565a35de0305658a
+- name: github.com/Pallinder/go-randomdata
+  version: 8c3362a5e6781e0d1046f1267b3c1f19b2cde334
 - name: github.com/tylerb/is
   version: 18dbf8347a9045703d5b4f669f4a305980b5b6b0

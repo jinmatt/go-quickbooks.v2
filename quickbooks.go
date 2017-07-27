@@ -66,13 +66,14 @@ func (q *Quickbooks) makePostRequest(endpoint string, body interface{}) (*http.R
 		return nil, err
 	}
 
-	request, err := http.NewRequest("GET", urlStr, bytes.NewReader(b))
+	request, err := http.NewRequest("POST", urlStr, bytes.NewReader(b))
 	if err != nil {
 		return nil, err
 	}
 
 	// headers
 	request.Header.Set("accept", "application/json")
+	request.Header.Set("Content-Type", "application/json")
 	request.Header.Set("Authorization", "Bearer "+q.AccessToken)
 
 	response, err := httpClient.Do(request)
