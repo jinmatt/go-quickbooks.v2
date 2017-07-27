@@ -13,27 +13,36 @@ type AccountObject struct {
 
 // Account quickbooks account type
 type Account struct {
-	Name                          string `json:"Name"`
-	SubAccount                    bool   `json:"SubAccount,omitempty"`
-	FullyQualifiedName            string `json:"FullyQualifiedName,omitempty"`
-	Active                        bool   `json:"Active,omitempty"`
-	Classification                string `json:"Classification,omitempty"`
-	AccountType                   string `json:"AccountType"`
-	AccountSubType                string `json:"AccountSubType,omitempty"`
-	CurrentBalance                int    `json:"CurrentBalance,omitempty"`
-	CurrentBalanceWithSubAccounts int    `json:"CurrentBalanceWithSubAccounts,omitempty"`
-	CurrencyRef                   struct {
-		Value string `json:"value,omitempty"`
-		Name  string `json:"name,omitempty"`
-	} `json:"CurrencyRef,omitempty"`
-	Domain    string `json:"domain,omitempty"`
-	Sparse    bool   `json:"sparse,omitempty"`
-	ID        string `json:"Id,omitempty"`
-	SyncToken string `json:"SyncToken,omitempty"`
-	MetaData  struct {
+	Name                          string       `json:"Name"`
+	SubAccount                    bool         `json:"SubAccount,omitempty"`
+	FullyQualifiedName            string       `json:"FullyQualifiedName,omitempty"`
+	Active                        bool         `json:"Active,omitempty"`
+	Classification                string       `json:"Classification,omitempty"`
+	AccountType                   string       `json:"AccountType"`
+	AccountSubType                string       `json:"AccountSubType,omitempty"`
+	CurrentBalance                int          `json:"CurrentBalance,omitempty"`
+	CurrentBalanceWithSubAccounts int          `json:"CurrentBalanceWithSubAccounts,omitempty"`
+	CurrencyRef                   *CurrencyRef `json:"CurrencyRef,omitempty"`
+	Domain                        string       `json:"domain,omitempty"`
+	Sparse                        bool         `json:"sparse,omitempty"`
+	ID                            string       `json:"Id,omitempty"`
+	SyncToken                     string       `json:"SyncToken,omitempty"`
+	MetaData                      struct {
 		CreateTime      string `json:"CreateTime,omitempty"`
 		LastUpdatedTime string `json:"LastUpdatedTime,omitempty"`
 	} `json:"MetaData,omitempty"`
+}
+
+// AccountRef chart of account reference
+type AccountRef struct {
+	Value string `json:"value"`
+	Name  string `json:"name,omitempty"`
+}
+
+// CurrencyRef chart of account currency reference
+type CurrencyRef struct {
+	Value string `json:"value"`
+	Name  string `json:"name,omitempty"`
 }
 
 // CreateAccount creates a chart of account on quickbooks
