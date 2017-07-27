@@ -38,6 +38,12 @@ type Item struct {
 	} `json:"MetaData,omitempty"`
 }
 
+// ItemRef quickbooks item reference object
+type ItemRef struct {
+	Value string `json:"value"`
+	Name  string `json:"name,omitempty"`
+}
+
 // CreateItem creates an item on quickbooks
 func (q *Quickbooks) CreateItem(item Item) (*ItemObject, error) {
 	endpoint := fmt.Sprintf("/company/%s/item", q.RealmID)

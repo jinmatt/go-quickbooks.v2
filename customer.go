@@ -59,6 +59,12 @@ type Address struct {
 	Long                   string `json:"Long,omitempty"`
 }
 
+// CustomerRef quickbooks customer reference object
+type CustomerRef struct {
+	Value string `json:"value"`
+	Name  string `json:"name,omitempty"`
+}
+
 // CreateCustomer creates a customer on quickbooks
 func (q *Quickbooks) CreateCustomer(customer Customer) (*CustomerObject, error) {
 	endpoint := fmt.Sprintf("/company/%s/customer", q.RealmID)
