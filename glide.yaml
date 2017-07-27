@@ -1,0 +1,4 @@
+package: github.com/jinmatt/go-quickbooks.v2
+import: []
+testImport:
+- package: github.com/tylerb/is

@@ -1,0 +1,6 @@
+hash: 0c13cd8b2a1558a3f54557ee3e08f11928244c01fa3f01426b73f5e295683b59
+updated: 2017-07-27T13:27:14.791141118-07:00
+imports: []
+testImports:
+- name: github.com/tylerb/is
+  version: 18dbf8347a9045703d5b4f669f4a305980b5b6b0
