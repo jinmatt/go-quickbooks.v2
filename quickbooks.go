@@ -11,18 +11,16 @@ import (
 
 // Quickbooks client type
 type Quickbooks struct {
-	RealmID      string
-	AccessToken  string
-	RefreshToken string
-	baseURL      string
+	RealmID     string
+	AccessToken string
+	baseURL     string
 }
 
 // NewClient creates a new client to work with Quickbooks
-func NewClient(realmID, accessToken, refreshToken string, isSandbox bool) *Quickbooks {
+func NewClient(realmID string, accessToken string, isSandbox bool) *Quickbooks {
 	q := Quickbooks{}
 	q.RealmID = realmID
 	q.AccessToken = accessToken
-	q.RefreshToken = refreshToken
 
 	if isSandbox {
 		q.baseURL = sdk.SandboxURL
@@ -51,6 +49,10 @@ func (q *Quickbooks) makeGetRequest(endpoint string) (*http.Response, error) {
 	response, err := httpClient.Do(request)
 	if err != nil {
 		return nil, err
+	}
+
+	if response.StatusCode != 200 {
+		return nil, handleError(response)
 	}
 
 	return response, nil
@@ -101,7 +103,7 @@ func handleError(response *http.Response) error {
 		return qbError
 	case 401:
 		sdkError := SDKError{}
-		return sdkError.New(consts.QBAuthorizationFault, string(response.StatusCode), consts.QBAuthorizationFaultMessage)
+		return sdkError.New(consts.QBAuthorizationFault, consts.QBAuthenticationFaultCode, consts.QBAuthorizationFaultMessage)
 	}
 
 	return nil

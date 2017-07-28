@@ -10,7 +10,7 @@ import (
 func TestSearch(t *testing.T) {
 	is := is.New(t)
 
-	qbo := quickbooks.NewClient(RealmID, AccessToken, RefreshToken, true)
+	qbo := quickbooks.NewClient(RealmID, AccessToken, true)
 
 	// Query account test
 	query := "Select * from Account"

@@ -13,7 +13,7 @@ import (
 func TestCreatePayment(t *testing.T) {
 	is := is.New(t)
 
-	qbo := quickbooks.NewClient(RealmID, AccessToken, RefreshToken, true)
+	qbo := quickbooks.NewClient(RealmID, AccessToken, true)
 
 	// create a chart of account for item
 	account := quickbooks.Account{}

@@ -10,7 +10,7 @@ import (
 func TestCompanyInfo(t *testing.T) {
 	is := is.New(t)
 
-	qbo := quickbooks.NewClient(RealmID, AccessToken, RefreshToken, true)
+	qbo := quickbooks.NewClient(RealmID, AccessToken, true)
 
 	company, err := qbo.GetCompanyInfo()
 	is.NotErr(err)

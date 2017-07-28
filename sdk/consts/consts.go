@@ -14,5 +14,6 @@ const (
 	QBSystemFault               = "SystemFault"
 	QBAuthenticationFault       = "AuthenticationFault"
 	QBAuthorizationFault        = "AuthorizationFault"
+	QBAuthenticationFaultCode   = "110"
 	QBAuthorizationFaultMessage = "Authorization has failed"
 )

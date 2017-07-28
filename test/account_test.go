@@ -13,7 +13,7 @@ import (
 func TestCreateAccount(t *testing.T) {
 	is := is.New(t)
 
-	qbo := quickbooks.NewClient(RealmID, AccessToken, RefreshToken, true)
+	qbo := quickbooks.NewClient(RealmID, AccessToken, true)
 
 	account := quickbooks.Account{}
 	account.Name = randomdata.SillyName() + seed.RandomKey(7)
