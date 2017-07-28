@@ -23,18 +23,18 @@ type Invoice struct {
 	TxnDate      string         `json:"TxnDate,omitempty"`
 	LinkedTxn    *[]LinkedTxn   `json:"LinkedTxn,omitempty"`
 	Line         []InvoiceLine  `json:"Line"`
-	TxnTaxDetail struct {
+	TxnTaxDetail *struct {
 		TxnTaxCodeRef *TaxCodeRef `json:"TxnTaxCodeRef,omitempty"`
 		TotalTax      float64     `json:"TotalTax"`
 		TaxLine       []TaxLine   `json:"TaxLine,omitempty"`
 	} `json:"TxnTaxDetail,omitempty"`
 	CustomerRef  *CustomerRef `json:"CustomerRef"`
-	CustomerMemo struct {
+	CustomerMemo *struct {
 		Value string `json:"value"`
 	} `json:"CustomerMemo,omitempty"`
 	BillAddr     *Address `json:"BillAddr"`
 	ShipAddr     *Address `json:"ShipAddr"`
-	SalesTermRef struct {
+	SalesTermRef *struct {
 		Value string `json:"value"`
 	} `json:"SalesTermRef,omitempty"`
 	DueDate               string  `json:"DueDate,omitempty"`
@@ -42,11 +42,11 @@ type Invoice struct {
 	ApplyTaxAfterDiscount bool    `json:"ApplyTaxAfterDiscount,omitempty"`
 	PrintStatus           string  `json:"PrintStatus,omitempty"`
 	EmailStatus           string  `json:"EmailStatus,omitempty"`
-	BillEmail             struct {
+	BillEmail             *struct {
 		Address string `json:"Address"`
 	} `json:"BillEmail,omitempty"`
 	Balance  float64 `json:"Balance,omitempty"`
-	MetaData struct {
+	MetaData *struct {
 		CreateTime      string `json:"CreateTime"`
 		LastUpdatedTime string `json:"LastUpdatedTime"`
 	} `json:"MetaData,omitempty"`
