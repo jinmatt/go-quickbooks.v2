@@ -3,9 +3,11 @@ package quickbooks
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"net/http"
 
 	"github.com/jinmatt/go-quickbooks.v2/sdk"
+	"github.com/jinmatt/go-quickbooks.v2/sdk/consts"
 )
 
 // Quickbooks client type
@@ -81,5 +83,27 @@ func (q *Quickbooks) makePostRequest(endpoint string, body interface{}) (*http.R
 		return nil, err
 	}
 
+	if response.StatusCode != 200 {
+		return nil, handleError(response)
+	}
+
 	return response, nil
+}
+
+func handleError(response *http.Response) error {
+	switch response.StatusCode {
+	case 400:
+		qbError := ErrorObject{}
+		err := json.NewDecoder(response.Body).Decode(&qbError)
+		if err != nil {
+			return err
+		}
+
+		return qbError
+	case 401:
+		sdkError := SDKError{}
+		return sdkError.New(consts.QBAuthorizationFault, string(response.StatusCode), consts.QBAuthorizationFaultMessage)
+	}
+
+	return errors.New("text")
 }

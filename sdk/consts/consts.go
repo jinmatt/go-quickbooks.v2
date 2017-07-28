@@ -8,4 +8,11 @@ const (
 	QBItemServiceType      = "Service"
 	QBSalesItemLineDetail  = "SalesItemLineDetail"
 	QBPaymentIncomeTxnType = "Invoice"
+
+	//QB fault types
+	QBValidationFault           = "ValidationFault"
+	QBSystemFault               = "SystemFault"
+	QBAuthenticationFault       = "AuthenticationFault"
+	QBAuthorizationFault        = "AuthorizationFault"
+	QBAuthorizationFaultMessage = "Authorization has failed"
 )
