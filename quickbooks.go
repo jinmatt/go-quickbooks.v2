@@ -3,7 +3,6 @@ package quickbooks
 import (
 	"bytes"
 	"encoding/json"
-	"errors"
 	"net/http"
 
 	"github.com/jinmatt/go-quickbooks.v2/sdk"
@@ -105,5 +104,5 @@ func handleError(response *http.Response) error {
 		return sdkError.New(consts.QBAuthorizationFault, string(response.StatusCode), consts.QBAuthorizationFaultMessage)
 	}
 
-	return errors.New("text")
+	return nil
 }
