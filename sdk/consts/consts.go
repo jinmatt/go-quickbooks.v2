@@ -16,4 +16,9 @@ const (
 	QBAuthorizationFault        = "AuthorizationFault"
 	QBAuthenticationFaultCode   = "110"
 	QBAuthorizationFaultMessage = "Authorization has failed"
+
+	//QB Authorization Code error types
+	QBAuthorizationCodeFailure        = "AuthorizationFailure"
+	QBAuthorizationCodeFailureCode    = "120"
+	QBAuthorizationFailureCodeMessage = "Invalid grant"
 )
