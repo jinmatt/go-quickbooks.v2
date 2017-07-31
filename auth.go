@@ -76,7 +76,48 @@ func GetBearerToken(clientID, clientSecret, code, redirectURI string, isSandbox 
 	if res.StatusCode != 200 {
 		sdkError := SDKError{}
 		return nil, sdkError.New(consts.QBAuthorizationCodeFailure, consts.QBAuthorizationCodeFailureCode, consts.QBAuthorizationFailureCodeMessage)
+	}
 
+	bearerToken := BearerToken{}
+	err = json.NewDecoder(res.Body).Decode(&bearerToken)
+	if err != nil {
+		return nil, err
+	}
+
+	return &bearerToken, nil
+}
+
+// RefreshToken gets new bearer token
+func RefreshToken(clientID, clientSecret string, refreshToken string, isSandbox bool) (*BearerToken, error) {
+	discovery, err := NewDiscovery(isSandbox)
+	if err != nil {
+		return nil, err
+	}
+
+	tokenEndpoint := discovery.TokenEndpoint
+
+	q := url.Values{}
+	q.Set("grant_type", "refresh_token")
+	q.Add("refresh_token", refreshToken)
+
+	req, err := http.NewRequest("POST", tokenEndpoint, bytes.NewBufferString(q.Encode()))
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Set("accept", "application/json")
+	req.Header.Set("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8")
+	req.Header.Set("Authorization", "Basic "+basicAuth(clientID, clientSecret))
+
+	httpClient := &http.Client{}
+	res, err := httpClient.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer res.Body.Close()
+
+	if res.StatusCode != 200 {
+		sdkError := SDKError{}
+		return nil, sdkError.New(consts.QBAuthorizationCodeFailure, consts.QBAuthorizationCodeFailureCode, consts.QBAuthorizationFailureCodeMessage)
 	}
 
 	bearerToken := BearerToken{}

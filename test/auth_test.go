@@ -31,3 +31,13 @@ func TestGetBearerToken(t *testing.T) {
 	is.NotNil(bearerToken.RefreshToken)
 	is.Equal(bearerToken.ExpiresIn, 3600)
 }
+
+func TestRefreshToken(t *testing.T) {
+	is := is.New(t)
+
+	bearerToken, err := quickbooks.RefreshToken(ClientID, ClientSecret, RefreshToken, true)
+	is.NotErr(err)
+	is.NotNil(bearerToken.AccessToken)
+	is.NotNil(bearerToken.RefreshToken)
+	is.Equal(bearerToken.ExpiresIn, 3600)
+}
