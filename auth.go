@@ -129,6 +129,41 @@ func RefreshToken(clientID, clientSecret string, refreshToken string, isSandbox 
 	return &bearerToken, nil
 }
 
+// RevokeToken revokes existing bearer tokens
+func RevokeToken(clientID, clientSecret string, refreshToken string, isSandbox bool) error {
+	discovery, err := NewDiscovery(isSandbox)
+	if err != nil {
+		return err
+	}
+
+	revocationEndpoint := discovery.RevocationEndpoint
+
+	q := url.Values{}
+	q.Add("token", refreshToken)
+
+	req, err := http.NewRequest("POST", revocationEndpoint, bytes.NewBufferString(q.Encode()))
+	if err != nil {
+		return err
+	}
+	req.Header.Set("accept", "application/json")
+	req.Header.Set("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8")
+	req.Header.Set("Authorization", "Basic "+basicAuth(clientID, clientSecret))
+
+	httpClient := &http.Client{}
+	res, err := httpClient.Do(req)
+	if err != nil {
+		return err
+	}
+	defer res.Body.Close()
+
+	if res.StatusCode != 200 {
+		sdkError := SDKError{}
+		return sdkError.New(consts.QBAuthorizationCodeFailure, consts.QBAuthorizationCodeFailureCode, consts.QBInvalidBearerToken)
+	}
+
+	return nil
+}
+
 func basicAuth(clientID, clientSecret string) string {
 	auth := clientID + ":" + clientSecret
 	return base64.StdEncoding.EncodeToString([]byte(auth))

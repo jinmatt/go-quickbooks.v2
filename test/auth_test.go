@@ -41,3 +41,12 @@ func TestRefreshToken(t *testing.T) {
 	is.NotNil(bearerToken.RefreshToken)
 	is.Equal(bearerToken.ExpiresIn, 3600)
 }
+
+func TestRevokeToken(t *testing.T) {
+	t.Skip("Skipping test: bearer tokens expire after one time call")
+
+	is := is.New(t)
+
+	err := quickbooks.RevokeToken(ClientID, ClientSecret, RefreshToken, true)
+	is.NotErr(err)
+}

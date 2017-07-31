@@ -21,4 +21,6 @@ const (
 	QBAuthorizationCodeFailure        = "AuthorizationFailure"
 	QBAuthorizationCodeFailureCode    = "120"
 	QBAuthorizationFailureCodeMessage = "Invalid grant"
+
+	QBInvalidBearerToken = "Invalid bearer token"
 )
